@@ -6,3 +6,5 @@ For LeetCode - lc_PLAYLIST_CONCEPT_NUMBER - E.g. lc_tiq_array_1 <br>
 
 ### Index
  tiq - Top interview questions Easy <br>
+
+Note: Check the commits for the exact problem names.
