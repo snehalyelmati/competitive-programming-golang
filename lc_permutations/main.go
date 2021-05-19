@@ -2,36 +2,31 @@ package main
 
 import "fmt"
 
-// func permute(n []int) [][]int {
-// 	if len(n) == 1 {
-// 		return [][]int{n}
-// 	}
-
-// 	res := [][]int{}
-
-// 	for j := 0; j < len(n); j++ {
-// 		// fmt.Println(res)
-// 		first := n[0]
-// 		n = n[1:]
-
-// 		perms := permute(n)
-// 		// fmt.Println(perms)
-// 		// fmt.Println()
-
-// 		for i := 0; i < len(perms); i++ {
-// 			perms[i] = append(perms[i], first)
-// 			// fmt.Println(perms[i])
-// 		}
-// 		fmt.Println(perms)
-
-// 		res = append(res, perms...)
-// 		n = append(n, first)
-// 	}
-
-// 	return res
-// }
-
 func permute(n []int) [][]int {
+	if len(n) == 1 {
+		return [][]int{n}
+	}
+
+	res := [][]int{}
+
+	for j := 0; j < len(n); j++ {
+		first := n[0]
+		n = n[1:]
+
+		perms := permute(n)
+
+		for i := 0; i < len(perms); i++ {
+			perms[i] = append(perms[i], first)
+		}
+
+		res = append(res, perms...)
+		n = append(n, first)
+	}
+
+	return res
+}
+
+func permuteOld(n []int) [][]int {
 	var res = [][]int{}
 	helper(&res, n, 0)
 	return res
@@ -56,5 +51,5 @@ func helper(res *[][]int, n []int, currId int) {
 
 func main() {
 	nums := []int{1, 2, 3, 4}
-	fmt.Println(len(permute(nums)))
+	fmt.Println(permute(nums))
 }
