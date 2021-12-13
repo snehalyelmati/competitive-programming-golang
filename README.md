@@ -1,7 +1,8 @@
-# Competitive Programming using GoLang
+# Competitive Programming and DSA using GoLang
 
 ## DSA Notes
 1. [Algorithmic Complexity](notes/algorithmic-complexity.md)
+2. [Arrays](notes/arrays.md)
 
 
 
