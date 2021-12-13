@@ -1,4 +1,11 @@
 # Competitive Programming using GoLang
+
+## DSA Notes
+1. [Algorithmic Complexity](notes/algorithmic-complexity.md)
+
+
+
+## Legend for the Repository
 ### Naming convention used
 For CodeChef problems - codechef_PROBLEM_CODE <br>
 For Google Kickstart - ks_PROBLEM_CODE <br>
