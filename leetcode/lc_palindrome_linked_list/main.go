@@ -101,3 +101,45 @@ func isPalindrome(head *ListNode) bool {
     }
     return true
 }
+
+---------------------------------------------------
+
+func isPalindrome(head *ListNode) bool {
+    // reverse till the end pointer points to the end of the list
+    // start comparing the nodes
+    //      return false if the nodes don't match
+    
+    end := head
+    var prev *ListNode = nil
+    
+    // even - end is nil - curr vs prev
+    // odd - end.Next is nil - skip 1 node then curr vs prev
+    // 0<-1<-2->3->4->5
+    //  -- --p--h-- --e
+    for end != nil && end.Next != nil {
+        end = end.Next.Next
+        first := head.Next
+        head.Next = prev
+        prev = head
+        head = first
+    }
+    
+    if end == nil {
+        // it's even
+    } else {
+        // it's odd
+        // skip one node
+        head = head.Next
+    }
+    
+    // compare head and previous
+    for head != nil && prev != nil {
+        if head.Val != prev.Val {
+            return false
+        }
+        head = head.Next
+        prev = prev.Next
+    }
+    
+    return true
+}
