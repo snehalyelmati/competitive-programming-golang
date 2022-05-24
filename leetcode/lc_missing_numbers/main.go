@@ -38,7 +38,7 @@ func missingNumberOld3(n []int) int {
 	return miss
 }
 
-func missingNumber(n []int) int {
+func missingNumberOld4(n []int) int {
 	size := len(n)
 	exp := size * (size + 1) / 2
 	sum := 0
@@ -46,6 +46,22 @@ func missingNumber(n []int) int {
 		sum += v
 	}
 	return exp - sum
+}
+
+func missingNumber(nums []int) int {
+	mark := -1
+	for i := 0; i < len(nums); {
+		if nums[i] == 0 {
+			mark = i
+			i++
+		} else if nums[i] == i+1 {
+			i++
+		} else {
+			nums[nums[i]-1], nums[i] = nums[i], nums[nums[i]-1]
+		}
+	}
+
+	return mark + 1
 }
 
 func main() {
