@@ -13,34 +13,27 @@ func solveNQueens(n int) [][]string {
 		}
 	}
 
-	for i := 0; i < len(board); i++ {
-		helper(&board, 0, i, n, &res)
-	}
+	helper(&board, 0, &res)
 	return res
 }
 
-func helper(board *[][]string, r, c, queens int, res *[][]string) {
+func helper(board *[][]string, r int, res *[][]string) {
 	// check if the current space is safe
 	// call recursion for the next lines
 	// return the board when safetyCheck passes and queens are done
 
-	if !safetyCheck(*board, r, c) {
-		// fmt.Println("Failed safetyCheck: ", r, c)
-		return
-	}
-	// fmt.Println("Passed safetyCheck: ", r, c)
-
-	(*board)[r][c] = "Q"
-	if queens == 1 {
+	if r == len(*board) {
 		*res = append(*res, flattenBoard(*board))
-		(*board)[r][c] = "."
 		return
 	}
 
 	for i := 0; i < len(*board); i++ {
-		helper(board, r+1, i, queens-1, res)
+		if safetyCheck(*board, r, i) {
+			(*board)[r][i] = "Q"
+			helper(board, r+1, res)
+			(*board)[r][i] = "."
+		}
 	}
-	(*board)[r][c] = "."
 }
 
 func safetyCheck(board [][]string, r, c int) bool {
@@ -101,4 +94,5 @@ func printBoard(board [][]string) {
 
 func main() {
 	fmt.Println(solveNQueens(5))
+	fmt.Println(len(solveNQueens(5)))
 }
