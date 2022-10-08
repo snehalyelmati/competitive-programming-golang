@@ -49,6 +49,25 @@ func majorityElement(n []int) int {
 	return n[0]
 }
 
+func majorityElementOptimized(nums []int) int {
+    if len(nums) == 0 {
+        return -1
+    }
+    candidate, count := nums[0], 1
+    for i:=1; i<len(nums); i++ {
+        if nums[i] == candidate {
+            count++
+        } else {
+            count--
+            if count == 0 {
+                candidate = nums[i]
+                count = 1
+            }
+        }
+    }
+    return candidate
+}
+
 func main() {
 	arr := []int{2, 2, 1, 1, 1, 2, 2}
 
