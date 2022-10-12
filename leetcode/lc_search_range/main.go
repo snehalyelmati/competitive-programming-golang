@@ -2,6 +2,52 @@ package main
 
 import "fmt"
 
+func searchRangeOptimal(nums []int, target int) []int {
+	return []int{searchLow(nums, target), searchHigh(nums, target)}
+}
+
+func searchLow(nums []int, target int) int {
+	if len(nums) == 0 {
+		return -1
+	}
+
+	l, h := 0, len(nums)-1
+	for l <= h {
+		mid := (l + h) / 2
+		if nums[mid] >= target {
+			h = mid - 1
+		} else {
+			l = mid + 1
+		}
+	}
+
+	if l >= len(nums) || nums[l] != target {
+		return -1
+	}
+	return l
+}
+
+func searchHigh(nums []int, target int) int {
+	if len(nums) == 0 {
+		return -1
+	}
+
+	l, h := 0, len(nums)-1
+	for l <= h {
+		mid := (l + h) / 2
+		if nums[mid] > target {
+			h = mid - 1
+		} else {
+			l = mid + 1
+		}
+	}
+
+	if h < 0 || nums[h] != target {
+		return -1
+	}
+	return h
+}
+
 func searchRange(nums []int, target int) []int {
 	l, h := 0, len(nums)-1
 	if h == -1 {
