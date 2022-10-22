@@ -2,6 +2,82 @@ package main
 
 import "fmt"
 
+func setZeroesOptimal(matrix [][]int)  {
+    if len(matrix) == 0 {
+        return
+    }
+    fmt.Println("Original matrix:")
+    printMatrix(matrix)
+    
+    rowZ, colZ := false, false
+    for i:=0; i<len(matrix); i++ {
+        for j:=0; j<len(matrix[0]); j++ {
+            if i == 0 || j == 0 {
+                if matrix[i][j] == 0 && i == 0 {
+                    rowZ = true
+                }
+                if matrix[i][j] == 0 && j == 0 {
+                    colZ = true
+                }
+                continue
+            }
+            
+            if matrix[i][j] == 0 {
+                matrix[0][j] = 0
+                matrix[i][0] = 0
+            }
+        }
+    }
+    fmt.Println("Mod matrix:")
+    printMatrix(matrix)
+    
+    for i:=1; i<len(matrix[0]); i++ {
+        if matrix[0][i] == 0 {
+            setCol(matrix, i)
+        }
+    }
+    fmt.Println("Col matrix:")
+    printMatrix(matrix)
+    
+    for i:=1; i<len(matrix); i++ {
+        if matrix[i][0] == 0 {
+            setRow(matrix, i)
+        }
+    }
+    fmt.Println("Row matrix:")
+    printMatrix(matrix)
+    
+    if rowZ == true {
+        setRow(matrix, 0)
+    }
+    if colZ == true {
+        setCol(matrix, 0)
+    }
+    fmt.Println("Result matrix:")
+    printMatrix(matrix)
+}
+
+func setRow(matrix [][]int, r int) {
+    for i:=0; i<len(matrix[0]); i++ {
+        matrix[r][i] = 0
+    }
+}
+
+func setCol(matrix [][]int, c int) {
+    for i:=0; i<len(matrix); i++ {
+        matrix[i][c] = 0
+    }
+}
+
+func printMatrix(mat [][]int) {
+    for _, di := range mat {
+        for _, dj := range di {
+            fmt.Print(dj, " ")
+        }
+        fmt.Println()
+    }
+}
+
 func setZeroes(m [][]int) {
 	if len(m) == 0 {
 		return
